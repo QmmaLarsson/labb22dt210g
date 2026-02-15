@@ -3,7 +3,7 @@ import type TodoInterface from "../interfaces/TodoInterface"
 
 const Todo = ({ todo, updatedTodo }: { todo: TodoInterface, updatedTodo: Function }) => {
 
-    // State för att hantera felmeddelanden
+    //State för att hantera felmeddelanden
     const [error, setError] = useState<string | null>(null);
 
     //Uppdaterar status när användaren väljer nytt värde i select
@@ -38,7 +38,28 @@ const Todo = ({ todo, updatedTodo }: { todo: TodoInterface, updatedTodo: Functio
         } catch (error) {
             setError("Ett fel har uppstått, försök igen senare...");
         }
-    }
+    };
+
+    //Tar bort todo när användaren klickar på "Ta bort"
+    const deleteTodo = async () => {
+        try {
+            setError(null);
+
+            //Skickar DELETE-request till API
+            const res = await fetch(`https://labb2dt210g.onrender.com/api/todos/` + todo.id, {
+                method: "DELETE",
+            });
+
+            //Om delete lyckas hämtas alla todos igen
+            if (res.ok) {
+                updatedTodo();
+            } else {
+                setError("Ett fel har uppstått, försök igen senare...");
+            }
+        } catch (error) {
+            setError("Ett fel har uppstått, försök igen senare...");
+        }
+    };
 
     return (
         <article>
@@ -53,6 +74,9 @@ const Todo = ({ todo, updatedTodo }: { todo: TodoInterface, updatedTodo: Functio
                     <option value="pågående">PÅGÅENDE</option>
                     <option value="avklarad">AVKLARAD</option>
                 </select>
+                <button type="button" onClick={deleteTodo}>
+                    Ta bort
+                </button>
             </form>
             {error && <p>{error}</p>}
         </article>

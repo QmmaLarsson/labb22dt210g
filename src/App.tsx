@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type TodoInterface from "./interfaces/TodoInterface"
 import Todo from "./components/Todo";
+import AddTodo from "./components/AddTodo";
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
       <h1>Todo-list</h1>
       {error && <p>{error}</p>}
       {loading && <p>Data laddas in...</p>}
+
+      <AddTodo updatedTodo={fetchTodos} />
 
       {todos.map((todo) =>
         <Todo todo={todo} key={todo.id} updatedTodo={fetchTodos} />
