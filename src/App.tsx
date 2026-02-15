@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import type TodoInterface from "./interfaces/TodoInterface"
 import Todo from "./components/Todo";
 import AddTodo from "./components/AddTodo";
+import "./index.css";
+import Footer from './components/Footer'
 
 function App() {
 
@@ -38,15 +40,22 @@ function App() {
 
   return (
     <>
-      <h1>Todo-list</h1>
-      {error && <p>{error}</p>}
-      {loading && <p>Data laddas in...</p>}
+      <div className="page">
+        <main>
+          <h1>Todo-list</h1>
+          {error && <p className="error">{error}</p>}
 
-      <AddTodo updatedTodo={fetchTodos} />
+          <AddTodo updatedTodo={fetchTodos} />
 
-      {todos.map((todo) =>
-        <Todo todo={todo} key={todo.id} updatedTodo={fetchTodos} />
-      )}
+          <section>
+            {loading && <p style={{ textAlign: "center", fontStyle: "italic" }}>Data laddas in...</p>}
+            {todos.map((todo) =>
+              <Todo todo={todo} key={todo.id} updatedTodo={fetchTodos} />
+            )}
+          </section>
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }

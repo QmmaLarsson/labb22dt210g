@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./AddTodo.css";
 
 const AddTodo = ({ updatedTodo }: { updatedTodo: () => void }) => {
   //State för titel
@@ -60,18 +61,18 @@ const AddTodo = ({ updatedTodo }: { updatedTodo: () => void }) => {
   };
 
   return (
-    <form onSubmit={addTodo}>
-      <h3>Lägg till ny Todo</h3>
+    <form className="addForm" onSubmit={addTodo}>
+      <h2>Lägg till ny Todo</h2>
 
-      <label htmlFor="title">Titel:</label>
+      <label htmlFor="title"><b>Titel:</b></label>
       <br />
       <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-      <label htmlFor="description">Beskrivning:</label>
+      <label htmlFor="description"><b>Beskrivning:</b></label>
       <br />
       <textarea name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
-      <label htmlFor="status">Status:</label>
+      <label htmlFor="status"><b>Status:</b></label>
       <br />
       <select name="select" id="value" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
         <option value="ej påbörjad">EJ PÅBÖRJAD</option>
@@ -79,9 +80,9 @@ const AddTodo = ({ updatedTodo }: { updatedTodo: () => void }) => {
         <option value="avklarad">AVKLARAD</option>
       </select>
 
-      <button type="submit">Lägg till</button>
+      <button className="addBtn" type="submit">Lägg till</button>
 
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </form>
   );
 };

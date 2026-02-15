@@ -1,5 +1,6 @@
 import { useState } from "react"
 import type TodoInterface from "../interfaces/TodoInterface"
+import "./Todo.css";
 
 const Todo = ({ todo, updatedTodo }: { todo: TodoInterface, updatedTodo: Function }) => {
 
@@ -64,8 +65,8 @@ const Todo = ({ todo, updatedTodo }: { todo: TodoInterface, updatedTodo: Functio
     return (
         <article>
             <h3>{todo.title}</h3>
-            <p>{todo.description}</p>
-            <p>{todo.status.toUpperCase()}</p>
+            <p><b>Beskrivning: </b>{todo.description}</p>
+            <p><b>Status: </b>{todo.status.toUpperCase()}</p>
             <form>
                 <label htmlFor="status"><b>Ändra status:</b></label>
                 <br />
@@ -74,11 +75,11 @@ const Todo = ({ todo, updatedTodo }: { todo: TodoInterface, updatedTodo: Functio
                     <option value="pågående">PÅGÅENDE</option>
                     <option value="avklarad">AVKLARAD</option>
                 </select>
-                <button type="button" onClick={deleteTodo}>
+                <button className="deleteBtn" type="button" onClick={deleteTodo}>
                     Ta bort
                 </button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <p className="error">{error}</p>}
         </article>
     )
 }
