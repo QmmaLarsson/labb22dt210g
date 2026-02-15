@@ -1,5 +1,5 @@
 export default interface TodoInterface {
-    _id: string,
+    id: string,
     title: string,
     description: string,
     status: string

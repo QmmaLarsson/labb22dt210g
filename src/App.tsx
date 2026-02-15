@@ -38,11 +38,11 @@ function App() {
   return (
     <>
       <h1>Todo-list</h1>
-      {error && <p>(error)</p>}
+      {error && <p>{error}</p>}
       {loading && <p>Data laddas in...</p>}
 
       {todos.map((todo) =>
-        <Todo todo={todo} />
+        <Todo todo={todo} key={todo.id} updatedTodo={fetchTodos} />
       )}
     </>
   )
